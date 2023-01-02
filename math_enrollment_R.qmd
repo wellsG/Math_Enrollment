@@ -1,0 +1,28 @@
+---
+title: "Test_Quarto"
+format: html
+editor: visual
+---
+
+# Math Enrollment
+## Analysis of enrollment by semester given year
+Load Libraries
+```{r}
+library(tidyverse)
+library(infer)
+library(moderndive)
+library(Stat2Data)
+```
+
+Load data from Stat2Data library
+```{r}
+data("MathEnrollment")
+```
+```{r}
+ggplot(MathEnrollment, aes(x = AYear, y = Fall)) +
+  geom_boxplot(color = "black", fill = "darkgreen")
+
+ggplot(MathEnrollment, aes(x = AYear, y = Spring)) +
+  geom_boxplot(color = "black", fill = "darkgreen")
+```
+
