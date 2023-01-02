@@ -18,6 +18,7 @@ Load data from Stat2Data library
 ```{r}
 data("MathEnrollment")
 ```
+Visualize raw data to gather insights
 ```{r}
 ggplot(MathEnrollment, aes(x = AYear, y = Fall)) +
   geom_boxplot(color = "black", fill = "darkgreen")
@@ -26,3 +27,11 @@ ggplot(MathEnrollment, aes(x = AYear, y = Spring)) +
   geom_boxplot(color = "black", fill = "darkgreen")
 ```
 
+```{r}
+enrollment_summary <- MathEnrollment %>%
+  summarize(fall_sum = sum(Fall),
+            spring_sum = sum(Spring),
+            fall_mean = mean(Fall),
+            spring_mean = mean(Spring))
+enrollment_summary
+```
