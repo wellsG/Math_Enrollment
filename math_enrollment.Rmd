@@ -1,0 +1,59 @@
+---
+title: "MathEnrollment"
+author: "Wellsin Price"
+date: "2023-01-04"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Math Enrollment
+
+## Analysis of enrollment by semester given year
+
+Load Libraries
+
+```{r}
+library(tidyverse)
+library(infer)
+library(moderndive)
+library(Stat2Data)
+```
+
+Load data from Stat2Data library
+
+```{r}
+data("MathEnrollment")
+MathEnrollment
+```
+```{r}
+enrollment_summary <- MathEnrollment %>%
+  summarize(fall_sum = sum(Fall),
+            spring_sum = sum(Spring),
+            fall_mean = mean(Fall),
+            spring_mean = mean(Spring),)
+enrollment_summary
+```
+## Visualization
+Visualize raw data to gather insights
+
+```{r echo=F, fig.height = 3, fig.width=5}
+## Visualize the dataset by semesters and include lm model
+# Scatter point of Fall semesters
+ggplot(MathEnrollment, aes(x = AYear, y = Fall)) +
+  geom_point(color = "black") +
+  geom_smooth(method = "lm", se = FALSE)
+# Scatter point of Spring semesters
+ggplot(MathEnrollment, aes(x = AYear, y = Spring)) +
+  geom_point(color = "black") +
+  geom_smooth(method = "lm", se = FALSE)
+```
+```{r}
+enrollment_regression <- lm(formula(Fall ~ Spring), data = MathEnrollment)
+
+get_regression_points(enrollment_regression)
+```
+
+
